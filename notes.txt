@@ -1,0 +1,49 @@
+| Input Type   | Allowed  | When Used            |
+| ------------ | -------  | -------------------- |
+| Tuple        | ✅       | Simple test data     |
+| List         | ✅       | Same as tuple        |
+| Dict         | ✅       | JSON / API data      |
+| Row          | ✅       | Structured pipelines |
+| Pandas DF    | ✅       | Analytics / ML       |
+| Single tuple | ❌       | Not valid            |
+
+
+Use tuple/list → quick testing
+Use dict / Row → real-world data engineering
+Always prefer schema definition in production (for performance)
+
+
+Input → CSV / JSON
+Processing → PySpark
+Output → Parquet
+
+
+TRANSFORMATIONS-
+select()
+filter()
+withColumn()
+groupBy()
+
+ACTIONS-
+show()
+count()
+collect()
+write()
+
+
+WRITE DATA MODES-
+overwrite
+append
+ignore
+
+
+What is a Data Engineering Pipeline in PySpark?
+Source (CSV / DB / Logs)
+    ↓
+Read using Spark
+    ↓
+Clean & Transform
+    ↓
+Aggregate
+    ↓
+Write to Data Lake (Parquet)
