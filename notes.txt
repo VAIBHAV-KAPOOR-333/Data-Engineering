@@ -47,3 +47,153 @@ Clean & Transform
 Aggregate
     ↓
 Write to Data Lake (Parquet)
+
+
+| Task           | Simple Meaning                        |
+| -------------- | ------------------------------------- |
+| Data ingestion | Bringing data from apps, files, APIs  |
+| ETL / ELT      | Cleaning & transforming data          |
+| Storage        | Saving data in databases / warehouses |
+| Data quality   | Ensuring data is correct              |
+| Monitoring     | Checking pipelines don’t fail         |
+| Optimization   | Making pipelines fast & cheap         |
+
+
+NoSQL Databases (Basic Understanding)
+| Type      | Used For                    |
+| --------- | --------------------------- |
+| Document  | JSON data (MongoDB)         |
+| Column    | Large analytics (Cassandra) |
+| Key-Value | Fast lookup (Redis)         |
+| Graph     | Relationships (Neo4j)       |
+
+
+OLTP Characteristics:
+Small amount of data per query
+Very fast response needed
+Many users at the same time
+Data is frequently updated
+
+OLTP Databases:
+MySQL
+PostgreSQL
+Oracle
+SQL Server
+
+
+OLAP Characteristics:
+Large data scans
+Mostly READ operations
+Few users, heavy queries
+Data updated periodically (daily/hourly)
+
+OLAP Systems:
+Amazon Redshift
+Google BigQuery
+Snowflake
+Apache Hive
+
+
+| Feature   | OLTP         | OLAP            |
+| --------- | ------------ | --------------- |
+| Purpose   | Transactions | Analysis        |
+| Queries   | Simple       | Complex         |
+| Data size | Small        | Very large      |
+| Schema    | Normalized   | Denormalized    |
+|       (remove duplicates)| (faster reads)  |                   
+| Example   | Banking app  | Sales dashboard |
+
+
+App Data → OLTP DB
+OLTP → ETL/ELT → Data Lake
+Data Lake → OLAP Warehouse
+OLAP → Analytics & Reports
+
+
+| Feature           | Star   | Snowflake |
+| ----------------- | ------ | --------- |
+| Complexity        | Simple | Complex   |
+| Performance       | Faster | Slower    |
+| Storage           | More   | Less      |
+| Beginner friendly | Yes    | No        |
+
+
+SCD Summary:
+| Type   | History    | Usage       |
+| ------ | ---------- | ----------- |
+| Type 1 | No         | Corrections |
+| Type 2 | Full       | Analytics   |
+| Type 3 | Limited    | Last change |
+
+
+| Feature     | Natural Key | Surrogate Key |
+| ----------- | ----------- | ------------- |
+| Source      | Business    | System        |
+| Changes     | Can change  | Never         |
+| SCD Type 2  | Bad         | Perfect       |
+| Performance | Slower      | Faster        |
+
+
+| Feature            | ETL         | ELT         |
+| ------------------ | ----------- | ----------- |
+| Transform location | Before load | After load  |
+| Raw data stored    | No          | Yes         |
+| Scalability        | Low         | High        |
+| Cloud friendly     | No          | Yes         |
+| Modern usage       | Rare        | Very common |
+
+
+| Feature    | Batch   | Streaming      |
+| ---------- | ------- | -------------- |
+| Speed      | Slow    | Real-time      |
+| Complexity | Simple  | Complex        |
+| Use case   | Reports | Live analytics |
+
+
+| Format  | Best For    |
+| ------- | ----------- |
+| CSV     | Small files |
+| JSON    | APIs        |
+| Avro    | Streaming   |
+| Parquet | Analytics   |
+| ORC     | Hive        |
+
+
+Raw Data → Ingest → Store (Parquet) → Transform → Analyze
+OR
+Source → Ingestion → Storage → Processing → Analytics
+1️⃣ Source
+Apps, DBs, APIs
+2️⃣ Ingestion Layer
+Kafka, API scripts, file loaders
+3️⃣ Storage
+Data Lake (S3 HDFS)
+Data Warehouse
+4️⃣ Processing
+Spark
+SQL
+dbt
+5️⃣ Orchestration
+Airflow
+Prefect
+6️⃣ Consumption
+BI tools
+ML models
+
+
+Where validation happens?
+During data ingestion
+Before loading into warehouse
+Before sending data to analytics / ML
+
+
+Good Data Quality
+        ↓
+Governed & Documented Data
+        ↓
+Compliant with Laws
+        ↓
+Secure Access
+        ↓
+Trusted Analytics & ML
+
