@@ -1,0 +1,58 @@
+A Star Schema is a simple data model where:
+
+There is ONE central table → Fact Table
+Connected to multiple surrounding tables → Dimension Tables
+
+
+Why Star Schema is Used in Snowflake?
+
+Very easy to understand
+Fast querying (important for BI tools like Power BI, Tableau)
+Perfect for analytics & reporting
+    
+
+A Snowflake Schema is an extension of Star Schema, where:
+
+Dimension tables are broken into smaller tables
+More joins
+
+
+| Feature         | Star Schema | Snowflake Schema |
+| --------------- | ----------- | ---------------- |
+| Complexity      | Simple      | Complex          |
+| Number of joins | Less        | More             |
+| Performance     | Faster      | Slightly slower  |
+| Storage         | More        | Less             |
+| Snowflake Usage | Preferred   | Used when needed |
+
+
+# In Snowflake, storage is cheap → Star schema is usually preferred.
+
+
+
+
+Partitioning means dividing large data into smaller logical pieces so queries run faster.
+
+Snowflake uses:
+Micro-Partitions
+Automatic
+Invisible to user
+Created while loading data
+Usually 16MB–512MB in size
+
+
+Snowflake:
+Automatically scans only relevant micro-partitions
+This is called partition pruning
+✔ Faster queries
+✔ Less cost
+
+📌 You don’t worry about indexes much in Snowflake.
+
+
+
+
+
+
+
+
