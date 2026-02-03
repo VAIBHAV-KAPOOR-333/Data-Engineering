@@ -197,3 +197,59 @@ Secure Access
         ↓
 Trusted Analytics & ML
 
+
+| Topic             | Real Usage                    |
+| ----------------- | ----------------------------- |
+| Joins             | Combine multiple systems      |
+| Window Functions  | Dedup, ranking, latest record |
+| CTEs              | Clean transformation logic    |
+| Recursive Queries | Hierarchies                   |
+| Indexing          | Performance                   |
+| Incremental SQL   | Daily pipelines               |
+| CDC               | Real-time & batch sync        |
+
+
+Real-World Data Engineering Flow:
+1. Call API
+2. Convert JSON → DataFrame
+3. Clean data using pandas
+4. Save as Parquet
+5. Insert into database
+6. Log every step
+
+
+| SparkSession              | SparkContext             |
+| ------------------------- | ------------------------ |
+| High-level API            | Low-level engine         |
+| Used for DataFrames & SQL | Used for RDDs            |
+| You use it directly       | Spark uses it internally |
+
+
+| Feature         | RDD  | DataFrame | Dataset |
+| --------------- | ---- | --------- | ------- |
+| Level           | Low  | High      | High    |
+| Schema          | ❌   | ✅        | ✅      |
+| Optimization    | ❌   | ✅        | ✅      |
+| Used in PySpark | Rare | Most      | ❌      |
+
+
+| Feature           | Cron | Airflow |
+| ----------------- | ---- | ------- |
+| Scheduling        | ✅   | ✅      |
+| Task dependencies | ❌   | ✅      |
+| Monitoring        | ❌   | ✅      |
+| Retries           | ❌   | ✅      |
+| UI Dashboard      | ❌   | ✅      |
+
+
+| Feature        | Luigi | Airflow  |
+| -------------- | ----- | -------- |
+| UI             | Basic | Powerful |
+| Scheduling     | Basic | Advanced |
+| Learning curve | Easy  | Moderate |
+
+
+
+
+
+
