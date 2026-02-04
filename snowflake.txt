@@ -51,8 +51,119 @@ This is called partition pruning
 
 
 
+Natural Key:
+A key that comes from real business data.
+Example:
+Email ID
+Aadhaar number
+Product code
+
+Natural Keys are:
+Still stored
+Used for data matching
+Used in ETL/ELT logic
+
+
+Surrogate Key:
+A system-generated key.
+Example:
+Integer
+No business meaning
+Created by Data Engineer
+
+📌 Always use Surrogate Keys in Dimension Tables
 
 
 
+Typical Snowflake Data Engineering Flow:
+Load raw data into staging tables
+Clean & transform data
+Create dimension tables (with surrogate keys)
+Create fact tables
+Use Star Schema
+Snowflake handles partitioning & indexing automatically
+BI tools query Snowflake efficiently
+
+
+
+Simple Summary (Very Important for Interviews):
+✔ Star Schema → Simple, fast, preferred in Snowflake
+✔ Snowflake Schema → Complex, more joins
+✔ Partitioning → Automatic using micro-partitions
+✔ Indexing → No traditional indexes in Snowflake
+✔ Surrogate Keys → System-generated, best practice
+✔ Natural Keys → Business keys, used for matching
+
+
+
+| Feature         | Micro-Partitions | Clustering       | Search Optimization |
+| --------------- | ---------------- | ---------------- | ------------------- |
+| Manual setup    | ❌ No            | ✅ Yes           | ✅ Yes              |
+| Cost            | Free             | Compute cost     | Extra cost          |
+| Best for        | Range filters    | Large tables     | Point lookups       |
+| Acts like index | Yes (auto)       | Improves pruning | Strongest index     |
+
+
+
+A Warehouse in Snowflake is NOT a place to store data.
+It is a compute engine – meaning:
+A warehouse provides CPU + memory to run SQL queries, load data, transform data.
+
+
+Mini/X-Small warehouse:
+Low cost
+Enough for learning, practice, small datasets
+Perfect for freshers
+
+
+| Role            | Meaning                     |
+| --------------- | --------------------------- |
+| ACCOUNTADMIN    | Full power (dangerous)      |
+| SYSADMIN        | Create warehouses/databases |
+| SECURITYADMIN   | Manage users & roles        |
+| **CUSTOM ROLE** | Best practice               |
+
+
+
+| Schema    | Purpose           |
+| --------- | ----------------- |
+| raw       | Raw ingested data |
+| staging   | Cleaned data      |
+| analytics | Final reporting   |
+
+
+
+What is a Stage?
+A stage is a temporary storage location where files are kept before loading into tables.
+
+
+Why Stages are Needed in Data Engineering?
+Data usually comes as:
+CSV
+JSON
+Parquet
+
+You:
+Upload file to Stage
+Load data from stage → table
+
+
+| Stage Type      | Meaning          |
+| --------------- | ---------------- |
+| User Stage      | Personal space   |
+| Table Stage     | Linked to table  |
+| **Named Stage** | Best practice    |
+| External Stage  | S3 / Azure / GCS |
+
+
+
+| UI Section    | Purpose                |
+| ------------- | ---------------------- |
+| Worksheets    | Write SQL              |
+| Data          | View databases, tables |
+| Warehouses    | Manage compute         |
+| Query History | Debug queries          |
+| Stages        | Upload files           |
+| Roles         | Access control         |
 
 
