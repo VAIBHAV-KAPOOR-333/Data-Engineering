@@ -167,3 +167,12 @@ Load data from stage → table
 | Roles         | Access control         |
 
 
+WINDOW FUNCTION:
+| Function     | Use                   |
+| ------------ | --------------------- |
+| ROW_NUMBER() | Remove duplicates     |
+| RANK()       | Ranking               |
+| DENSE_RANK() | Ranking without gaps  |
+| SUM() OVER   | Running total         |
+| LAG / LEAD   | Previous / next value |
+

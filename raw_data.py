@@ -2,6 +2,9 @@ from pyspark.sql import SparkSession
 import random
 import os
 
+# Set JAVA_HOME for Spark
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
+
 # ============================================================
 # 1. Create Spark Session
 # ============================================================
@@ -13,17 +16,20 @@ spark = SparkSession.builder \
 
 # ============================================================
 # Helper Function: Rename Spark CSV Output
-# Spark always creates part-*.csv inside a folder
-# This function renames it to a meaningful file name
+# Spark writes files like part-00000-xxxx.csv
+# This function renames it to a clean, readable name
 # ============================================================
 
-def rename_csv(output_dir, final_name):
-    for file in os.listdir(output_dir):
-        if file.startswith("part-") and file.endswith(".csv"):
+def rename_csv(folder_path, new_file_name):
+    for f in os.listdir(folder_path):
+        # Spark-generated CSV files always start with "part-"
+        if f.startswith("part-") and f.endswith(".csv"):
             os.rename(
-                os.path.join(output_dir, file),
-                os.path.join(output_dir, final_name)
+                os.path.join(folder_path, f),
+                os.path.join(folder_path, new_file_name)
             )
+            print(f"Renamed {f} to {new_file_name}")
+            break
 
 # ============================================================
 # 2. CUSTOMER TABLE (1000 records)
@@ -77,15 +83,16 @@ product_catalog = {
 
 products = []
 product_id = 1
+PRODUCTS_PER_ITEM = 10
 
 for category, items in product_catalog.items():
     for item in items:
-        for _ in range(10):   # multiple products per category
+        for _ in range(PRODUCTS_PER_ITEM):
             products.append((
-                product_id,                       # product_id
-                f"{item} {product_id}",           # product_name
-                category,                         # category
-                round(random.uniform(100, 5000), 2)  # price
+                product_id,                        # product_id
+                f"{item} {product_id}",            # product_name
+                category,                          # category
+                round(random.uniform(100, 5000), 2) # price
             ))
             product_id += 1
 
@@ -98,6 +105,7 @@ product_df.show(5)
 
 # ============================================================
 # 4. ORDERS TABLE (5000 records)
+# Random month + day for realism
 # ============================================================
 
 orders = []
@@ -111,7 +119,7 @@ for i in range(1, 5001):
         random.randint(1, 1000),                # customer_id
         product[0],                             # product_id
         quantity,                               # quantity
-        f"2024-02-{random.randint(1,28)}",      # order_date
+        f"2024-{random.randint(1,12):02d}-{random.randint(1,28)}",
         round(product[3] * quantity, 2)         # total_amount
     ))
 
@@ -132,13 +140,14 @@ base_path = f"{current_dir}/snowflake_raw_data"
 customer_path = f"{base_path}/customer"
 product_path = f"{base_path}/product"
 orders_path = f"{base_path}/orders"
+print(customer_path, product_path, orders_path)
 
-# Write CSVs (Spark output)
+# Write CSV files (Spark output)
 customer_df.coalesce(1).write.mode("overwrite").option("header", True).csv(customer_path)
 product_df.coalesce(1).write.mode("overwrite").option("header", True).csv(product_path)
 orders_df.coalesce(1).write.mode("overwrite").option("header", True).csv(orders_path)
 
-# Rename files to meaningful names
+# Rename Spark-generated CSV files
 rename_csv(customer_path, "customer.csv")
 rename_csv(product_path, "product.csv")
 rename_csv(orders_path, "orders.csv")
