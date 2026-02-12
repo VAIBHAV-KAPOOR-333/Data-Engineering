@@ -249,6 +249,14 @@ Real-World Data Engineering Flow:
 | Learning curve | Easy  | Moderate |
 
 
+Cron Syntax:
+* * * * * command
+│ │ │ │ │
+│ │ │ │ └── Day of week
+│ │ │ └──── Month
+│ │ └────── Day of month
+│ └──────── Hour
+└────────── Minute
 
 
 
